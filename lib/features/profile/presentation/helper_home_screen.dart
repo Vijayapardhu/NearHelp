@@ -44,7 +44,7 @@ class _HelperHomeScreenState extends ConsumerState<HelperHomeScreen> {
           children: [
             // 1. Custom Gradient Header
             Container(
-              height: 160,
+              height: 180,
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 50),
               decoration: BoxDecoration(
                 gradient: LinearGradient(

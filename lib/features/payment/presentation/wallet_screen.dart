@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class WalletScreen extends StatelessWidget {
   const WalletScreen({super.key});
@@ -19,7 +20,7 @@ class WalletScreen extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text("My Wallet", style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text("My Wallet", style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -54,9 +55,9 @@ class WalletScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      const Text("Total Balance", style: TextStyle(color: Colors.white70, fontSize: 16)),
+                      Text("Total Balance", style: GoogleFonts.poppins(color: Colors.white70, fontSize: 16)),
                       const SizedBox(height: 8),
-                      Text("₹${balance.toStringAsFixed(2)}", style: const TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold)),
+                      Text("₹${balance.toStringAsFixed(2)}", style: GoogleFonts.poppins(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 24),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -77,9 +78,9 @@ class WalletScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Row(
                   children: [
-                    const Text("Recent Transactions", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    Text("Recent Transactions", style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold)),
                     const Spacer(),
-                    TextButton(onPressed: (){}, child: const Text("See All")),
+                    TextButton(onPressed: (){}, child: Text("See All", style: GoogleFonts.poppins())),
                   ],
                 ),
               ),
@@ -117,17 +118,19 @@ class WalletScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 16),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(tx['title'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                                Text(tx['date'], style: TextStyle(color: Colors.grey[600], fontSize: 13)),
-                              ],
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(tx['title'], style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 16)),
+                                  Text(tx['date'], style: GoogleFonts.poppins(color: Colors.grey[600], fontSize: 13)),
+                                ],
+                              ),
                             ),
-                            const Spacer(),
+                            const SizedBox(width: 8),
                             Text(
                               "${(tx['isCredit'] as bool) ? '+' : ''}₹${(tx['amount'] as double).abs().toStringAsFixed(0)}",
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
                                 color: (tx['isCredit'] as bool) ? Colors.green : Colors.red,
@@ -161,7 +164,7 @@ class WalletScreen extends StatelessWidget {
             child: Icon(icon, color: Colors.white, size: 24),
           ),
           const SizedBox(height: 4),
-          Text(label, style: const TextStyle(color: Colors.white, fontSize: 12)),
+          Text(label, style: GoogleFonts.poppins(color: Colors.white, fontSize: 12)),
         ],
       ),
     );

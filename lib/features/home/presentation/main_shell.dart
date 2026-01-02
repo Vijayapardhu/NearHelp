@@ -5,6 +5,7 @@ import '../../profile/presentation/helper_home_screen.dart';
 import '../../profile/presentation/profile_screen.dart';
 import '../../history/presentation/history_screen.dart';
 import 'package:near_help/l10n/app_localizations.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class MainShell extends ConsumerStatefulWidget {
   final Map<String, dynamic> userProfile;
@@ -38,36 +39,49 @@ class _MainShellState extends ConsumerState<MainShell> {
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
+          color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 10,
-              offset: const Offset(0, -5),
-            ),
+              blurRadius: 20,
+              color: Colors.black.withOpacity(.1),
+            )
           ],
         ),
-        child: NavigationBar(
-          selectedIndex: _selectedIndex,
-          onDestinationSelected: (idx) => setState(() => _selectedIndex = idx),
-          elevation: 0,
-          backgroundColor: Colors.white,
-          destinations: [
-            NavigationDestination(
-              icon: Icon(isHelper ? Icons.radar : Icons.map_outlined),
-              selectedIcon: Icon(isHelper ? Icons.radar : Icons.map),
-              label: isHelper ? l10n.jobRadar : "Map",
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+            child: GNav(
+              rippleColor: Colors.grey[300]!,
+              hoverColor: Colors.grey[100]!,
+              gap: 8,
+              activeColor: Colors.white,
+              iconSize: 24,
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              duration: const Duration(milliseconds: 400),
+              tabBackgroundColor: Colors.blue.shade600,
+              color: Colors.black,
+              tabs: [
+                GButton(
+                  icon: isHelper ? Icons.radar : Icons.map_outlined,
+                  text: isHelper ? l10n.jobRadar : "Map",
+                ),
+                GButton(
+                  icon: Icons.history,
+                  text: l10n.myHistory,
+                ),
+                GButton(
+                  icon: Icons.person,
+                  text: l10n.profile,
+                ),
+              ],
+              selectedIndex: _selectedIndex,
+              onTabChange: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
             ),
-            NavigationDestination(
-              icon: const Icon(Icons.history_outlined),
-              selectedIcon: const Icon(Icons.history),
-              label: l10n.myHistory,
-            ),
-            NavigationDestination(
-              icon: const Icon(Icons.person_outline),
-              selectedIcon: const Icon(Icons.person),
-              label: l10n.profile,
-            ),
-          ],
+          ),
         ),
       ),
     );

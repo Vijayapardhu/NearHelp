@@ -99,35 +99,44 @@ class _UserHomeScreenState extends ConsumerState<UserHomeScreen> {
             left: 0,
             right: 0,
             child: Container(
-              padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
+              height: 180,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 50),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.blue.shade50.withOpacity(0.95),
-                    Colors.white.withOpacity(0.0),
-                  ],
-                  stops: const [0.6, 1.0],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Colors.blue.shade700, Colors.blue.shade500],
                 ),
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
+                ),
+                boxShadow: [
+                  BoxShadow(color: Colors.blue.withOpacity(0.3), blurRadius: 20, offset: const Offset(0, 10)),
+                ],
               ),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                   Container(
-                     padding: const EdgeInsets.all(12),
-                     decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle, boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8)]),
-                     child: Image.asset('assets/images/logo.png', height: 50),
-                   ),
-                   const SizedBox(width: 12),
-                   Column(
-                     crossAxisAlignment: CrossAxisAlignment.start,
+                   Row(
                      children: [
-                       Text(l10n.appName, style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.blue.shade800)),
-                       Text("Finding help nearby...", style: TextStyle(fontSize: 12, color: Colors.blue.shade600)),
+                       Container(
+                         padding: const EdgeInsets.all(8),
+                         decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), shape: BoxShape.circle),
+                         child: Image.asset('assets/images/logo.png', height: 32, color: Colors.white),
+                       ),
+                       const SizedBox(width: 12),
+                       Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         mainAxisAlignment: MainAxisAlignment.center,
+                         children: [
+                           Text(l10n.appName, style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+                           const Text("Finding help nearby...", style: TextStyle(fontSize: 12, color: Colors.white70)),
+                         ],
+                       ),
                      ],
                    ),
-                   const Spacer(),
-                   const SOSButton(),
+                   const SOSButton(), // Assuming SOSButton can adapt or is visible on blue
                 ],
               ),
             ),

@@ -45,7 +45,7 @@ class ProfileScreen extends ConsumerWidget {
                 children: [
                   // 1. Custom Gradient Header (Job Radar Style)
                   Container(
-                    height: 160,
+                    height: 180,
                     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 50),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(

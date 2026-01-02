@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class EarningsScreen extends StatelessWidget {
   const EarningsScreen({super.key});
@@ -60,16 +61,16 @@ class EarningsScreen extends StatelessWidget {
                     children: [
                       const Text("Total Earnings", style: TextStyle(color: Colors.white70, fontSize: 16)),
                       const SizedBox(height: 8),
-                      Text("₹${totalEarnings.toStringAsFixed(2)}", style: const TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold)),
+                      Text("₹${totalEarnings.toStringAsFixed(2)}", style: GoogleFonts.poppins(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 24),
                       Row(
                         children: [
                           Expanded(
                             child: Column(
                               children: [
-                                const Text("Withdrawable", style: TextStyle(color: Colors.white70, fontSize: 12)),
+                                Text("Withdrawable", style: GoogleFonts.poppins(color: Colors.white70, fontSize: 12)),
                                 const SizedBox(height: 4),
-                                Text("₹${withdrawable.toStringAsFixed(2)}", style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
+                                Text("₹${withdrawable.toStringAsFixed(2)}", style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
                               ],
                             ),
                           ),
@@ -77,9 +78,9 @@ class EarningsScreen extends StatelessWidget {
                           Expanded(
                             child: Column(
                               children: [
-                                const Text("Pending", style: TextStyle(color: Colors.white70, fontSize: 12)),
+                                Text("Pending", style: GoogleFonts.poppins(color: Colors.white70, fontSize: 12)),
                                 const SizedBox(height: 4),
-                                Text("₹${pendingClearance.toStringAsFixed(2)}", style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
+                                Text("₹${pendingClearance.toStringAsFixed(2)}", style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
                               ],
                             ),
                           ),
@@ -96,7 +97,7 @@ class EarningsScreen extends StatelessWidget {
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                             padding: const EdgeInsets.symmetric(vertical: 12),
                           ),
-                          child: const Text("Withdraw Earnings", style: TextStyle(fontWeight: FontWeight.bold)),
+                          child: Text("Withdraw Earnings", style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
                         ),
                       ),
                     ],
@@ -110,9 +111,9 @@ class EarningsScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Row(
                   children: [
-                    const Text("History", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    Text("History", style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold)),
                     const Spacer(),
-                    TextButton(onPressed: (){}, child: const Text("See All")),
+                    TextButton(onPressed: (){}, child: Text("See All", style: GoogleFonts.poppins())),
                   ],
                 ),
               ),
@@ -151,20 +152,22 @@ class EarningsScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 16),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(tx['title'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                                Text(tx['date'], style: TextStyle(color: Colors.grey[600], fontSize: 13)),
-                              ],
+                            Expanded( // Use Expanded to prevent overflow
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(tx['title'], style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 16)),
+                                  Text(tx['date'], style: GoogleFonts.poppins(color: Colors.grey[600], fontSize: 13)),
+                                ],
+                              ),
                             ),
-                            const Spacer(),
+                            const SizedBox(width: 8),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
                                   "+₹${(tx['amount'] as double).toStringAsFixed(0)}",
-                                  style: const TextStyle(
+                                  style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
                                     color: Colors.black87,
@@ -172,7 +175,7 @@ class EarningsScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   tx['status'],
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                     fontSize: 12,
                                     color: isPending ? Colors.orange : Colors.green,
                                     fontWeight: FontWeight.w500,
