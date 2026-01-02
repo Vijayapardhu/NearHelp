@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:near_help/l10n/app_localizations.dart';
+import 'widgets/role_switch_screen.dart';
+import 'edit_profile_screen.dart';
 import '../../auth/data/auth_controller.dart';
 import '../../auth/data/auth_repository.dart';
 import '../data/profile_controller.dart';
@@ -169,6 +171,22 @@ class ProfileScreen extends ConsumerWidget {
                                         letterSpacing: 1.2,
                                       ),
                                     ),
+                                    const SizedBox(height: 16),
+                                    SizedBox(
+                                      height: 36,
+                                      child: OutlinedButton.icon(
+                                        onPressed: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (_) => const EditProfileScreen()));
+                                        },
+                                        icon: const Icon(Icons.edit, size: 16),
+                                        label: const Text("Edit Profile"),
+                                        style: OutlinedButton.styleFrom(
+                                          foregroundColor: Colors.blue.shade700,
+                                          side: BorderSide(color: Colors.blue.shade200),
+                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -258,6 +276,17 @@ class ProfileScreen extends ConsumerWidget {
                                         ),
                                       ],
                                     ),
+                                  ),
+
+
+
+                                  // Switch Role Button
+                                  _buildSettingTile(
+                                    icon: Icons.swap_horiz,
+                                    color: Colors.deepOrange,
+                                    title: profile['role'] == 'helper' ? "Switch to User Mode" : "Switch to Helper Mode",
+                                    subtitle: "Swap your role",
+                                    onTap: () => _confirmRoleSwitch(context, profile['id'], profile['role'] == 'helper' ? 'user' : 'helper'),
                                   ),
 
                                   _buildSettingTile(
@@ -420,4 +449,25 @@ class ProfileScreen extends ConsumerWidget {
       ],
     );
   }
+
+  void _confirmRoleSwitch(BuildContext context, String userId, String targetRole) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text("Switch Role"),
+        content: Text("Are you sure you want to switch to ${targetRole.toUpperCase()} mode? The app will restart."),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text("Cancel")),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              Navigator.push(context, MaterialPageRoute(builder: (_) => RoleSwitchScreen(targetRole: targetRole, userId: userId)));
+            },
+            child: const Text("Confirm"),
+          ),
+        ],
+      ),
+    );
+  }
+}
 }

@@ -61,4 +61,8 @@ class ProfileRepository {
       await _client.from('profiles').update(updates).eq('id', userId);
     }
   }
+
+  Future<void> updateRole(String userId, String newRole) async {
+    await _client.from('profiles').update({'role': newRole}).eq('id', userId);
+  }
 }
